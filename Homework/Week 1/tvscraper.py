@@ -6,6 +6,7 @@ This script scrapes IMDB and outputs a CSV file with highest rated tv series.
 '''
 import csv
 
+
 from pattern.web import URL, DOM
 
 TARGET_URL = "http://www.imdb.com/search/title?num_votes=5000,&sort=user_rating,desc&start=1&title_type=tv_series"
@@ -14,31 +15,86 @@ OUTPUT_CSV = 'tvseries.csv'
 
 
 def extract_tvseries(dom):
-    '''
-    Extract a list of highest rated TV series from DOM (of IMDB page).
 
-    Each TV series entry should contain the following fields:
-    - TV Title
-    - Rating
-    - Genres (comma separated if more than one)
-    - Actors/actresses (comma separated if more than one)
-    - Runtime (only a number!)
-    '''
+	amount_series = 0
+	amount_info = 5
+	# check how many series there are to be scraped
+	for Series in dom.by_class("lister-item-content"):
+		amount_series += 1
 
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RATED TV-SERIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
+	# create 2D array of appropriate size
+	tvseries = [[0 for x in range(amount_info)] for y in range(amount_series)] 
+	count = 0
+	# grab all Series and the details to then enter into the 2D array
+	for Series in dom.by_class("lister-item-content"):
+	
+		# for all subsequent for loops, make sure the content isn't None or an empty string
+		# also convert all unicode characters to normal characters
+		# finally add them to their appropriate spot in the 2D array
+	
+		# grab Series name
+		for Item in Series.by_class("lister-item-header"):
+			title = Item.by_tag('a')[0].content.encode("windows-1252")
+			if title in ("", None):
+				tvseries[count][0] = "Empty"
+			else:
+				tvseries[count][0] = title
+			
+		# grab rating
+		for Item in Series.by_class("ratings-imdb-rating"):
+			rating = Item.by_tag("strong")[0].content.encode("windows-1252")
+			if rating in ("", None):
+				tvseries[count][1] = "Empty"
+			else:
+				tvseries[count][1] = rating
+			
+		# grab Genre
+		for Item in Series.by_class("genre"):
+			genre = Item.content[1:-12].encode("windows-1252")
+			if genre in ("", None):
+				tvseries[count][2] = "Empty"
+			else:
+				tvseries[count][2] = genre
+			
+		
+		# grab Actors
+		actorList = []
+		for Item in Series.by_tag("p")[2].by_tag("a"):
+			actorList.append(Item.content.encode("windows-1252"))
+		actors = ", ".join(actorList)
+		
+		if actors in ("", None):
+			tvseries[count][3] = "Empty"
+		else:
+			tvseries[count][3] = actors
 
-    return []  # replace this line as well as appropriate
+		# grab Runtime
+		for Item in Series.by_class("runtime"):
+			runtime = Item.content[:-4].encode("windows-1252")
+			if runtime in ("", None):
+				tvseries[count][4] = "Empty"s
+			else:
+				tvseries[count][4] = runtime
+		
+		count += 1
+			
+    #return []  # replace this line as well as appropriate
+	return tvseries;
 
 
 def save_csv(f, tvseries):
-    '''
-    Output a CSV file containing highest rated TV-series.
-    '''
-    writer = csv.writer(f)
-    writer.writerow(['Title', 'Rating', 'Genre', 'Actors', 'Runtime'])
+    # '''
+    # Output a CSV file containing highest rated TV-series.
+    # '''
+	writer = csv.writer(f)
+	writer.writerow(['Title', 'Rating', 'Genre', 'Actors', 'Runtime'])
+	tvseries = tvseries
+	count = 0
+	# write the data of each entree in the 2D array
+	for series in tvseries:
+		writer.writerow([tvseries[count][0], tvseries[count][1], tvseries[count][2], tvseries[count][3], tvseries[count][4]])
+		count += 1
+
 
     # ADD SOME CODE OF YOURSELF HERE TO WRITE THE TV-SERIES TO DISK
 
