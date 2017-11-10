@@ -1,0 +1,539 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+</head>
+<body>
+
+
+<div>
+<h3>De Bilt, average temperature (2000)</h3>
+<canvas id="canvas" width="600" height="500"></canvas>
+</div>
+
+<textarea id="rawdata">
+20000101,   61
+20000102,   73
+20000103,   84
+20000104,   64
+20000105,   44
+20000106,   72
+20000107,   61
+20000108,   54
+20000109,    8
+20000110,   -8
+20000111,   21
+20000112,    7
+20000113,   20
+20000114,   29
+20000115,   32
+20000116,   54
+20000117,   64
+20000118,   66
+20000119,   39
+20000120,   52
+20000121,   52
+20000122,   47
+20000123,   11
+20000124,  -28
+20000125,    5
+20000126,   24
+20000127,   24
+20000128,   32
+20000129,   90
+20000130,   91
+20000131,   97
+20000201,   90
+20000202,   74
+20000203,   64
+20000204,   76
+20000205,   84
+20000206,   76
+20000207,   79
+20000208,   86
+20000209,   65
+20000210,   58
+20000211,   46
+20000212,   45
+20000213,   52
+20000214,   45
+20000215,   66
+20000216,   37
+20000217,   36
+20000218,   49
+20000219,   48
+20000220,   22
+20000221,   22
+20000222,   28
+20000223,   51
+20000224,   78
+20000225,   54
+20000226,   34
+20000227,   76
+20000228,   92
+20000229,   65
+20000301,   53
+20000302,   49
+20000303,   69
+20000304,   19
+20000305,   32
+20000306,   63
+20000307,   96
+20000308,  111
+20000309,  107
+20000310,   65
+20000311,   87
+20000312,   77
+20000313,   77
+20000314,   78
+20000315,   60
+20000316,   80
+20000317,   82
+20000318,   70
+20000319,   58
+20000320,   51
+20000321,   60
+20000322,   72
+20000323,   72
+20000324,   88
+20000325,   86
+20000326,   63
+20000327,   56
+20000328,   41
+20000329,   59
+20000330,   65
+20000331,   61
+20000401,   62
+20000402,  100
+20000403,  119
+20000404,  101
+20000405,   48
+20000406,   48
+20000407,   55
+20000408,   66
+20000409,   93
+20000410,   59
+20000411,   61
+20000412,   62
+20000413,   59
+20000414,   69
+20000415,   89
+20000416,   93
+20000417,  107
+20000418,  106
+20000419,  119
+20000420,  134
+20000421,  137
+20000422,  133
+20000423,  111
+20000424,  113
+20000425,  149
+20000426,  149
+20000427,  152
+20000428,  158
+20000429,  119
+20000430,  125
+20000501,  128
+20000502,  104
+20000503,  120
+20000504,  134
+20000505,  181
+20000506,  201
+20000507,  192
+20000508,  193
+20000509,  196
+20000510,  198
+20000511,  184
+20000512,  189
+20000513,  181
+20000514,  192
+20000515,  208
+20000516,  202
+20000517,  137
+20000518,  114
+20000519,  103
+20000520,  108
+20000521,  100
+20000522,  114
+20000523,  138
+20000524,  140
+20000525,  132
+20000526,  136
+20000527,  124
+20000528,   94
+20000529,  101
+20000530,   98
+20000531,  125
+20000601,  151
+20000602,  164
+20000603,  181
+20000604,  167
+20000605,  123
+20000606,  128
+20000607,  123
+20000608,  155
+20000609,  212
+20000610,  166
+20000611,  148
+20000612,  162
+20000613,  169
+20000614,  172
+20000615,  151
+20000616,  132
+20000617,  149
+20000618,  211
+20000619,  257
+20000620,  259
+20000621,  205
+20000622,  163
+20000623,  151
+20000624,  135
+20000625,  127
+20000626,  124
+20000627,  123
+20000628,  124
+20000629,  132
+20000630,  137
+20000701,  136
+20000702,  190
+20000703,  194
+20000704,  176
+20000705,  158
+20000706,  165
+20000707,  140
+20000708,  127
+20000709,  138
+20000710,  152
+20000711,  133
+20000712,  139
+20000713,  145
+20000714,  132
+20000715,  128
+20000716,  142
+20000717,  136
+20000718,  140
+20000719,  161
+20000720,  163
+20000721,  146
+20000722,  151
+20000723,  165
+20000724,  184
+20000725,  170
+20000726,  155
+20000727,  165
+20000728,  170
+20000729,  159
+20000730,  168
+20000731,  183
+20000801,  210
+20000802,  182
+20000803,  173
+20000804,  165
+20000805,  166
+20000806,  175
+20000807,  186
+20000808,  173
+20000809,  184
+20000810,  187
+20000811,  189
+20000812,  176
+20000813,  217
+20000814,  217
+20000815,  182
+20000816,  183
+20000817,  179
+20000818,  176
+20000819,  186
+20000820,  175
+20000821,  156
+20000822,  153
+20000823,  155
+20000824,  156
+20000825,  163
+20000826,  195
+20000827,  167
+20000828,  144
+20000829,  146
+20000830,  139
+20000831,  144
+20000901,  157
+20000902,  145
+20000903,  149
+20000904,  138
+20000905,  154
+20000906,  151
+20000907,  159
+20000908,  174
+20000909,  173
+20000910,  170
+20000911,  184
+20000912,  176
+20000913,  160
+20000914,  152
+20000915,  166
+20000916,  155
+20000917,  130
+20000918,  159
+20000919,  174
+20000920,  148
+20000921,  137
+20000922,  154
+20000923,  165
+20000924,  147
+20000925,  152
+20000926,  169
+20000927,  161
+20000928,  158
+20000929,  169
+20000930,  159
+20001001,  138
+20001002,  124
+20001003,  127
+20001004,  122
+20001005,  121
+20001006,   92
+20001007,   84
+20001008,  101
+20001009,   96
+20001010,   94
+20001011,  104
+20001012,  117
+20001013,  116
+20001014,   98
+20001015,  103
+20001016,  123
+20001017,  102
+20001018,   99
+20001019,  107
+20001020,  113
+20001021,  149
+20001022,  149
+20001023,  146
+20001024,  122
+20001025,  122
+20001026,  102
+20001027,  108
+20001028,  132
+20001029,  101
+20001030,  105
+20001031,   92
+20001101,   76
+20001102,   78
+20001103,   77
+20001104,   68
+20001105,   71
+20001106,   94
+20001107,   85
+20001108,   82
+20001109,   78
+20001110,   71
+20001111,   86
+20001112,   87
+20001113,   79
+20001114,   56
+20001115,   57
+20001116,   72
+20001117,   50
+20001118,   64
+20001119,   91
+20001120,   63
+20001121,   62
+20001122,   86
+20001123,   84
+20001124,   70
+20001125,   72
+20001126,   76
+20001127,   66
+20001128,  119
+20001129,  111
+20001130,  106
+20001201,  116
+20001202,  105
+20001203,   84
+20001204,   70
+20001205,   96
+20001206,  109
+20001207,   98
+20001208,  122
+20001209,   94
+20001210,   96
+20001211,  120
+20001212,  131
+20001213,  108
+20001214,   74
+20001215,   56
+20001216,   41
+20001217,   25
+20001218,   32
+20001219,   27
+20001220,   16
+20001221,   -1
+20001222,  -23
+20001223,  -20
+20001224,    6
+20001225,   -6
+20001226,  -22
+20001227,  -10
+20001228,    5
+20001229,    6
+20001230,   17
+20001231,   -1
+</textarea>
+
+<script>
+	// start a new XMLHttpRequest
+	var xhttp = new XMLHttpRequest();
+	// when page changes state
+	xhttp.onreadystatechange = function() {
+		// if file properly retrieved and connection is succesful
+		if (this.readyState == 4 && this.status == 200) {
+		   	// create lists for the dates and the average temperature
+			var dates = [];
+			var averageTemperature = [];
+			// open the xhttp response text in seperal lines
+			var rawData = this.responseText.split("\n");
+			// iterate through rawData
+			for (i = 1; i < rawData.length; i++)
+			{
+				// create javascript-type daily-date data based on rawData
+				var year = rawData[i].substring(0,4);
+				var month = rawData[i].substring(4,6);
+				var day = rawData[i].substring(6,8);
+				var date = new Date(year, month, day);
+
+				// store dates and temperature in the lists
+				dates.push(date);
+				averageTemperature.push(Number(rawData[i].slice(9)));
+			}
+
+			// initiate canvas 
+			var canvas = document.getElementById('canvas'); 
+			var ctx = canvas.getContext('2d')
+
+			// define height canvas
+			canvasHeight = 300
+
+			// define ranges and the domain
+			var maximum = Math.max.apply(null, averageTemperature)
+			var minimum = Math.min.apply(null, averageTemperature)
+			domain = [minimum, maximum]
+			range = [0, canvasHeight]
+
+			// given function, but renamed variables to fit naming scheme (camelCase)
+			function createTransform(domain, range){
+
+				var domainMin = domain[0]
+				var domainMax = domain[1]
+				var rangeMin = range[0]
+				var rangeMax = range[1]
+
+				// Calculate the alpha and beta
+				alpha = (rangeMax - rangeMin) / (domainMax - domainMin)
+				beta = rangeMax - alpha * domainMax
+				// returns the function for the linear transformation (y= a * x + b)
+				return function(x){
+				  return alpha * x + beta;
+				}
+			}
+
+			// transformer determines the y for value x 
+			transformer = createTransform(domain, range)
+
+			// display options for canvas and ctx line
+			ctx.strokeStyle = 'green'
+			ctx.lineWidth = 2
+			pointsPerDay = 1
+			cornercanvasYPoint = 360
+			cornercanvasXPoint = 100
+			linecanvasPositioning = 50
+
+			// create canvas with lines
+			for (i = 0, j = dates.length; i < j; i+= pointsPerDay)
+			{	
+				ctx.beginPath();
+				ctx.moveTo((i + cornercanvasXPoint), 
+						  (canvasHeight + linecanvasPositioning) -
+						  transformer(averageTemperature[i]));
+				ctx.lineTo((i + cornercanvasXPoint + pointsPerDay), 
+						  (canvasHeight + linecanvasPositioning) - 
+						  transformer(averageTemperature[i + pointsPerDay]));
+				ctx.stroke();
+			}
+
+			// create x-axis 
+			ctx.beginPath();
+			ctx.moveTo(cornercanvasXPoint, cornercanvasYPoint)
+			ctx.lineTo(cornercanvasXPoint + dates.length, cornercanvasYPoint)
+			ctx.stroke();
+
+			// create array with months
+			var month = new Array();
+			month[0] = "Jan";
+			month[1] = "Feb";
+			month[2] = "Mar";
+			month[3] = "Apr";
+			month[4] = "May";
+			month[5] = "Jun";
+			month[6] = "Jul";
+			month[7] = "Aug";
+			month[8] = "Sept";
+			month[9] = "Oct";
+			month[10] = "Nov";
+			month[11] = "Dec";
+
+			var counter = dates[0].getMonth();
+			markerSize = 10
+			textSpot = 30
+
+			// draw and label the x-axis
+			for (i = cornercanvasXPoint, j = cornercanvasXPoint + dates.length; i < j; i ++)
+			{	
+				// ensure markers appear for first of each month
+				if (counter == dates[i-cornercanvasXPoint].getMonth())
+				{
+					counter ++;
+					ctx.beginPath();
+					ctx.moveTo(i, cornercanvasYPoint)
+					ctx.lineTo(i, cornercanvasYPoint + markerSize)
+					ctx.fillText(month[dates[i - cornercanvasXPoint].getMonth()],
+								i, cornercanvasYPoint + textSpot)
+					ctx.stroke();
+				}	
+			}
+
+			// determine length y-axis
+			YAxisLength = 320
+
+			// create y Axis 
+			ctx.beginPath();
+			ctx.moveTo(cornercanvasXPoint, cornercanvasYPoint)
+			ctx.lineTo(cornercanvasXPoint, cornercanvasYPoint - YAxisLength)
+			ctx.stroke();
+
+			// put markers on y-axis 
+			markerAmount = 8
+			unitTemperature = YAxisLength / markerAmount
+
+			// draw and label the y-axis
+			for (i = cornercanvasYPoint - YAxisLength; i <= cornercanvasYPoint; i ++)
+			{
+				if (i % unitTemperature == 0)
+				{
+					ctx.beginPath();
+					ctx.moveTo(cornercanvasXPoint, i)
+					ctx.lineTo(cornercanvasXPoint - markerSize, i)
+					ctx.fillText(i - 80, 
+								cornercanvasXPoint - textSpot,
+								cornercanvasYPoint - i + unitTemperature);
+					ctx.stroke();
+				}
+			}
+		}
+	};
+	// open local file using GET method. (async)
+	xhttp.open("GET", "rawdata.csv", true);
+	xhttp.send(); 
+
+
+</script>
+</body>
+</html>
