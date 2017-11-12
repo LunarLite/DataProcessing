@@ -452,7 +452,7 @@
 			month[10] = "Nov";
 			month[11] = "Dec";
 
-			var counter = datesData[0].getMonth();
+			var count = datesData[0].getMonth();
 			markerSize = 10
 			textSpot = 30
 
@@ -460,9 +460,9 @@
 			for (i = cornercanvasXPoint, j = cornercanvasXPoint + datesData.length; i < j; i ++)
 			{	
 				// ensure markers appear for first of each month
-				if (counter == datesData[i-cornercanvasXPoint].getMonth())
+				if (count == datesData[i-cornercanvasXPoint].getMonth())
 				{
-					counter ++;
+					count ++;
 					ctx.beginPath();
 					ctx.moveTo(i, cornercanvasYPoint)
 					ctx.lineTo(i, cornercanvasYPoint + markerSize)
@@ -481,7 +481,7 @@
 			ctx.lineTo(cornercanvasXPoint, cornercanvasYPoint - YAxisLength)
 			ctx.stroke();
 
-			// put markers on y-axis 
+			// determine amount and space between y-axis markers
 			markerCount = 8
 			unitTemperature = YAxisLength / markerCount
 
