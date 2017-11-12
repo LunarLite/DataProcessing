@@ -386,25 +386,15 @@
 	xhttp.onreadystatechange = function() {
 		// if file properly retrieved and connection is succesful
 		if (this.readyState == 4 && this.status == 200) {
-		   	// create lists for the dates and the average temperature
-			var dates = [];
-			var averageTemperature = [];
+		
 			// open the xhttp response text in seperal lines
 			var rawData = this.responseText.split("\n");
-			// iterate through rawData
-			for (i = 1; i < rawData.length; i++)
-			{
-				// create javascript-type daily-date data based on rawData
-				var year = rawData[i].substring(0,4);
-				var month = rawData[i].substring(4,6);
-				var day = rawData[i].substring(6,8);
-				var date = new Date(year, month, day);
-
-				// store dates and temperature in the lists
-				dates.push(date);
-				averageTemperature.push(Number(rawData[i].slice(9)));
-			}
-
+			
+			// read the data, return data to local lists
+			var data = ReadData(rawData);
+			var datesData = data[0];
+			var temperatureData = data[1];
+			
 			// initiate canvas 
 			var canvas = document.getElementById('canvas'); 
 			var ctx = canvas.getContext('2d')
@@ -412,27 +402,10 @@
 			canvasHeight = 300
 
 			// define ranges and the domain
-			var maximum = Math.max.apply(null, averageTemperature)
-			var minimum = Math.min.apply(null, averageTemperature)
+			var maximum = Math.max.apply(null, temperatureData)
+			var minimum = Math.min.apply(null, temperatureData)
 			domain = [minimum, maximum]
 			range = [0, canvasHeight]
-
-			// given function, but renamed variables to fit naming scheme (camelCase)
-			function createTransform(domain, range){
-
-				var domainMin = domain[0]
-				var domainMax = domain[1]
-				var rangeMin = range[0]
-				var rangeMax = range[1]
-
-				// Calculate the alpha and beta
-				alpha = (rangeMax - rangeMin) / (domainMax - domainMin)
-				beta = rangeMax - alpha * domainMax
-				// returns the function for the linear transformation (y= a * x + b)
-				return function(x){
-				  return alpha * x + beta;
-				}
-			}
 
 			// transformer determines the y for value x 
 			transformer = createTransform(domain, range)
@@ -446,22 +419,22 @@
 			linecanvasPositioning = 50
 
 			// create canvas with lines
-			for (i = 0, j = dates.length; i < j; i+= pointsPerDay)
+			for (i = 0, j = datesData.length; i < j; i+= pointsPerDay)
 			{	
 				ctx.beginPath();
 				ctx.moveTo((i + cornercanvasXPoint), 
 						  (canvasHeight + linecanvasPositioning) -
-						  transformer(averageTemperature[i]));
+						  transformer(temperatureData[i]));
 				ctx.lineTo((i + cornercanvasXPoint + pointsPerDay), 
 						  (canvasHeight + linecanvasPositioning) - 
-						  transformer(averageTemperature[i + pointsPerDay]));
+						  transformer(temperatureData[i + pointsPerDay]));
 				ctx.stroke();
 			}
 
 			// create x-axis 
 			ctx.beginPath();
 			ctx.moveTo(cornercanvasXPoint, cornercanvasYPoint)
-			ctx.lineTo(cornercanvasXPoint + dates.length, cornercanvasYPoint)
+			ctx.lineTo(cornercanvasXPoint + datesData.length, cornercanvasYPoint)
 			ctx.stroke();
 
 			// create array with months
@@ -479,21 +452,21 @@
 			month[10] = "Nov";
 			month[11] = "Dec";
 
-			var counter = dates[0].getMonth();
+			var counter = datesData[0].getMonth();
 			markerSize = 10
 			textSpot = 30
 
 			// draw and label the x-axis
-			for (i = cornercanvasXPoint, j = cornercanvasXPoint + dates.length; i < j; i ++)
+			for (i = cornercanvasXPoint, j = cornercanvasXPoint + datesData.length; i < j; i ++)
 			{	
 				// ensure markers appear for first of each month
-				if (counter == dates[i-cornercanvasXPoint].getMonth())
+				if (counter == datesData[i-cornercanvasXPoint].getMonth())
 				{
 					counter ++;
 					ctx.beginPath();
 					ctx.moveTo(i, cornercanvasYPoint)
 					ctx.lineTo(i, cornercanvasYPoint + markerSize)
-					ctx.fillText(month[dates[i - cornercanvasXPoint].getMonth()],
+					ctx.fillText(month[datesData[i - cornercanvasXPoint].getMonth()],
 								i, cornercanvasYPoint + textSpot)
 					ctx.stroke();
 				}	
@@ -509,8 +482,8 @@
 			ctx.stroke();
 
 			// put markers on y-axis 
-			markerAmount = 8
-			unitTemperature = YAxisLength / markerAmount
+			markerCount = 8
+			unitTemperature = YAxisLength / markerCount
 
 			// draw and label the y-axis
 			for (i = cornercanvasYPoint - YAxisLength; i <= cornercanvasYPoint; i ++)
@@ -531,6 +504,46 @@
 	// open local file using GET method. (async)
 	xhttp.open("GET", "rawdata.csv", true);
 	xhttp.send(); 
+	
+	function ReadData(rawData)
+	{
+		var datesData = [];
+		var temperatureData = [];
+		// iterate through rawData
+		for (i = 1; i < rawData.length; i++)
+		{	
+			
+			// create javascript-type daily-date data based on rawData
+			var year = rawData[i].substring(0,4);
+			var month = rawData[i].substring(4,6);
+			var day = rawData[i].substring(6,8);
+			var date = new Date(year, month, day);
+
+			// store dates and temperature in the lists
+			datesData.push(date);
+			temperatureData.push(Number(rawData[i].slice(9)));
+			
+			
+		}
+		return [datesData, temperatureData]
+	}
+	
+	// given function, but renamed variables to fit naming scheme (camelCase)
+	function createTransform(domain, range){
+
+		var domainMin = domain[0]
+		var domainMax = domain[1]
+		var rangeMin = range[0]
+		var rangeMax = range[1]
+
+		// Calculate the alpha and beta
+		alpha = (rangeMax - rangeMin) / (domainMax - domainMin)
+		beta = rangeMax - alpha * domainMax
+		// returns the function for the linear transformation (y= a * x + b)
+		return function(x){
+		  return alpha * x + beta;
+		}
+	}
 
 
 </script>
