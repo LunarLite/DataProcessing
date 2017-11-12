@@ -414,27 +414,27 @@
 			ctx.strokeStyle = 'green'
 			ctx.lineWidth = 2
 			pointsPerDay = 1
-			cornercanvasYPoint = 360
-			cornercanvasXPoint = 100
-			linecanvasPositioning = 50
+			cornerCanvasYPoint = 360
+			cornerCanvasXPoint = 100
+			lineCanvasPositioning = 50
 
 			// create canvas with lines
 			for (i = 0, j = datesData.length; i < j; i+= pointsPerDay)
 			{	
 				ctx.beginPath();
-				ctx.moveTo((i + cornercanvasXPoint), 
-						  (canvasHeight + linecanvasPositioning) -
+				ctx.moveTo((i + cornerCanvasXPoint), 
+						  (canvasHeight + lineCanvasPositioning) -
 						  transformer(temperatureData[i]));
-				ctx.lineTo((i + cornercanvasXPoint + pointsPerDay), 
-						  (canvasHeight + linecanvasPositioning) - 
+				ctx.lineTo((i + cornerCanvasXPoint + pointsPerDay), 
+						  (canvasHeight + lineCanvasPositioning) - 
 						  transformer(temperatureData[i + pointsPerDay]));
 				ctx.stroke();
 			}
 
 			// create x-axis 
 			ctx.beginPath();
-			ctx.moveTo(cornercanvasXPoint, cornercanvasYPoint)
-			ctx.lineTo(cornercanvasXPoint + datesData.length, cornercanvasYPoint)
+			ctx.moveTo(cornerCanvasXPoint, cornerCanvasYPoint)
+			ctx.lineTo(cornerCanvasXPoint + datesData.length, cornerCanvasYPoint)
 			ctx.stroke();
 
 			// create array with months
@@ -457,17 +457,17 @@
 			textSpot = 30
 
 			// draw and label the x-axis
-			for (i = cornercanvasXPoint, j = cornercanvasXPoint + datesData.length; i < j; i ++)
+			for (i = cornerCanvasXPoint, j = cornerCanvasXPoint + datesData.length; i < j; i ++)
 			{	
 				// ensure markers appear for first of each month
-				if (count == datesData[i-cornercanvasXPoint].getMonth())
+				if (count == datesData[i-cornerCanvasXPoint].getMonth())
 				{
 					count ++;
 					ctx.beginPath();
-					ctx.moveTo(i, cornercanvasYPoint)
-					ctx.lineTo(i, cornercanvasYPoint + markerSize)
-					ctx.fillText(month[datesData[i - cornercanvasXPoint].getMonth()],
-								i, cornercanvasYPoint + textSpot)
+					ctx.moveTo(i, cornerCanvasYPoint)
+					ctx.lineTo(i, cornerCanvasYPoint + markerSize)
+					ctx.fillText(month[datesData[i - cornerCanvasXPoint].getMonth()],
+								i, cornerCanvasYPoint + textSpot)
 					ctx.stroke();
 				}	
 			}
@@ -477,8 +477,8 @@
 
 			// create y Axis 
 			ctx.beginPath();
-			ctx.moveTo(cornercanvasXPoint, cornercanvasYPoint)
-			ctx.lineTo(cornercanvasXPoint, cornercanvasYPoint - YAxisLength)
+			ctx.moveTo(cornerCanvasXPoint, cornerCanvasYPoint)
+			ctx.lineTo(cornerCanvasXPoint, cornerCanvasYPoint - YAxisLength)
 			ctx.stroke();
 
 			// determine amount and space between y-axis markers
@@ -486,16 +486,16 @@
 			unitTemperature = YAxisLength / markerCount
 
 			// draw and label the y-axis
-			for (i = cornercanvasYPoint - YAxisLength; i <= cornercanvasYPoint; i ++)
+			for (i = cornerCanvasYPoint - YAxisLength; i <= cornerCanvasYPoint; i ++)
 			{
 				if (i % unitTemperature == 0)
 				{
 					ctx.beginPath();
-					ctx.moveTo(cornercanvasXPoint, i)
-					ctx.lineTo(cornercanvasXPoint - markerSize, i)
+					ctx.moveTo(cornerCanvasXPoint, i)
+					ctx.lineTo(cornerCanvasXPoint - markerSize, i)
 					ctx.fillText(i - 80, 
-								cornercanvasXPoint - textSpot,
-								cornercanvasYPoint - i + unitTemperature);
+								cornerCanvasXPoint - textSpot,
+								cornerCanvasYPoint - i + unitTemperature);
 					ctx.stroke();
 				}
 			}
