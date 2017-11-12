@@ -1,12 +1,19 @@
 <html>
-<head>
-<meta charset="utf-8"/>
-</head>
+	<head>
+	<meta charset="utf-8"/>
+		<style>
+			canvas 
+			{
+				height: 500;
+				width: 600;
+				border: 3px solid blue;
+			}
+		</style>
+	</head>
 <body>
 
 
 <div>
-<h3>De Bilt, average temperature (2000)</h3>
 <canvas id="canvas" width="600" height="500"></canvas>
 </div>
 
@@ -417,7 +424,7 @@
 			cornerCanvasYPoint = 360
 			cornerCanvasXPoint = 100
 			lineCanvasPositioning = 50
-
+			
 			// create canvas with lines
 			for (i = 0, j = datesData.length; i < j; i+= pointsPerDay)
 			{	
@@ -436,7 +443,8 @@
 			ctx.moveTo(cornerCanvasXPoint, cornerCanvasYPoint)
 			ctx.lineTo(cornerCanvasXPoint + datesData.length, cornerCanvasYPoint)
 			ctx.stroke();
-
+			
+			
 			// create array with months
 			var month = new Array();
 			month[0] = "Jan";
@@ -499,6 +507,10 @@
 					ctx.stroke();
 				}
 			}
+			
+			// add title... why doesn't the ctx.title attribute do anything though?
+			ctx.font="20px Georgia";
+			ctx.fillText("Average Temperature 'De Bilt' - 2000", cornerCanvasXPoint + 10, cornerCanvasYPoint + 80) 
 		}
 	};
 	// open local file using GET method. (async)
