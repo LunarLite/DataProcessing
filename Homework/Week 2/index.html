@@ -6,8 +6,9 @@
 			{
 				height: 500;
 				width: 600;
-				border: 3px solid blue;
-			}
+				border: 3px solid lime;
+				border-radius: 25px;
+			}in
 		</style>
 	</head>
 <body>
@@ -462,7 +463,8 @@
 
 			var count = datesData[0].getMonth();
 			markerSize = 10
-			textSpot = 30
+			textSpotX = 20
+			textSpotY = 40
 
 			// draw and label the x-axis
 			for (i = cornerCanvasXPoint, j = cornerCanvasXPoint + datesData.length; i < j; i ++)
@@ -475,7 +477,7 @@
 					ctx.moveTo(i, cornerCanvasYPoint)
 					ctx.lineTo(i, cornerCanvasYPoint + markerSize)
 					ctx.fillText(month[datesData[i - cornerCanvasXPoint].getMonth()],
-								i, cornerCanvasYPoint + textSpot)
+								i, cornerCanvasYPoint + textSpotX)
 					ctx.stroke();
 				}	
 			}
@@ -501,8 +503,8 @@
 					ctx.beginPath();
 					ctx.moveTo(cornerCanvasXPoint, i)
 					ctx.lineTo(cornerCanvasXPoint - markerSize, i)
-					ctx.fillText(i - 80, 
-								cornerCanvasXPoint - textSpot,
+					ctx.fillText((i - 80)/10 + ",0 °C", 
+								cornerCanvasXPoint - textSpotY,
 								cornerCanvasYPoint - i + unitTemperature);
 					ctx.stroke();
 				}
