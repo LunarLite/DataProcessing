@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dataprocessing Week 4 - Mick tozer</title>
+		<meta charset="utf-8">
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		
+		<!-<link rel="stylesheet" type="text/css" href="barchart.css">-->
+		
+		<style>
+			body {
+			  font: 10px sans-serif;
+			}
+
+			.axis path,
+			.axis line {
+			  fill: none;
+			  stroke: #000;
+			  shape-rendering: crispEdges;
+			}
+
+			.dot {
+			  stroke: #000;
+			}
+			
+			
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+		</style>
+	</head>
+	<body>
+		<script>		
+			var margin = {top: 20, right: 20, bottom: 30, left: 40},
+				width = 960 - margin.left - margin.right,
+				height = 500 - margin.top - margin.bottom;
+
+			var x = d3.scale.linear()
+				.range([0, width]);
+
+			var y = d3.scale.linear()
+				.range([height, 0]);
+
+			var color = d3.scale.category10();
+
+			var xAxis = d3.svg.axis()
+				.scale(x)
+				.orient("bottom");
+
+			var yAxis = d3.svg.axis()
+				.scale(y)
+				.orient("left");
+
+				
+						// add a tooltip object
+			var tip = d3.tip()
+				.attr('class', 'd3-tip')
+				.offset([-10, 0])
+				.html(function(d) {
+					return "<strong>" + d.LOCATION + "</strong><br>" + 
+					"<strong>Year:</strong> <span style='color:red'>" + d.TIME +"</span><br>" + 
+					"<strong>GPD:</strong> <span style='color:red'>$" + d.Value + "</span>";
+				})
+			var svg = d3.select("body").append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.classed("plot", true)
+			  .append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			svg.call(tip);
+			d3.tsv("data.tsv", function(error, data) {
+				if (error) throw error;
+				data.forEach(function(d) {
+					d.date = +d.TIME;
+					d.value = +d.Value;
+				});
+				
+
+
+			x.domain(d3.extent(data, function(d) { return d.date; })).nice();
+			y.domain(d3.extent(data, function(d) { return d.value; })).nice();
+			
+			svg.append("g")
+				.attr("class", "x axis")
+				.attr("transform", "translate(0," + height + ")")
+				.call(xAxis)
+			  .append("text")
+				.attr("class", "label")
+				.attr("x", width)
+				.attr("y", -6)
+				.style("text-anchor", "end")
+				.text("Period (p.year)");
+
+			svg.append("g")
+				.attr("class", "y axis")
+				.call(yAxis)
+			  .append("text")
+				.attr("class", "label")
+				.attr("transform", "rotate(-90)")
+				.attr("y", 6)
+				.attr("dy", ".71em")
+				.style("text-anchor", "end")
+				.text("Gross domestic product (Mln. USD)")
+
+			svg.selectAll(".dot")
+				.data(data)
+			  .enter().append("circle")
+				.attr("class", "dot")
+				.attr("r", function(d, i) {
+						if(i > 0){
+							var prevLocation = data[i-1].LOCATION;
+							var prevValue = data[i-1].Value;
+							
+							if(d.LOCATION == prevLocation){
+								size = Math.abs(((d.value/prevValue) - 1) * 50)
+								if(size > 20){return 3;}
+								else{return size;}
+							}
+						}
+						return 3;
+					})
+				.attr("cx", function(d) { return x(d.date); })
+				.attr("cy", function(d) { return y(d.value); })
+				.style("fill", function(d) { 
+						if(d.LOCATION == "BEL"){
+							return "yellow";
+						}
+						else if(d.LOCATION == "LUX"){
+							return "orange";
+						}
+						else{
+							return "red";
+						}
+					})
+				.on('mouseover', function(d){
+						tip.show(d)
+						svg.selectAll(".dot")
+							.style("opacity", 0.2)
+						d3.select(this)
+							.style("opacity", 1);
+					})
+				.on('mouseout',  function(d) {
+						tip.hide(d)
+						svg.selectAll(".dot")
+							.style("opacity", 1)
+					});
+
+			legendColours = ["NLD", "LUX", "BEL"];
+			
+			var legend = svg.selectAll(".legend")
+				.data(legendColours)
+			  .enter().append("g")
+				.attr("class", "legend")
+				.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+			legend.append("rect")
+				.attr("x", width - 18)
+				.attr("width", 18)
+				.attr("height", 18)
+				.style("fill", function(d) { 
+						if(d == "BEL"){
+							legendLocation = "BEL";
+							return "yellow";
+						}
+						else if(d == "LUX"){
+							legendLocation = "LUX";
+							return "orange";
+						}
+						else{
+							legendLocation = "NLD";
+							return "red";
+						}
+					})
+				.on('mouseover', function(d){
+						var con = d;
+						svg.selectAll(".dot")
+							.style("opacity", function(d){
+								if(d.LOCATION == con){
+									return 1;
+								}
+								else{
+									return 0.2;
+								}
+							})
+					})
+				.on('mouseout',  function(d) {
+						svg.selectAll(".dot")
+							.style("opacity", 1)
+					});
+
+			legend.append("text")
+				.attr("x", width - 24)
+				.attr("y", 9)
+				.attr("dy", ".35em")
+				.style("text-anchor", "end")
+				.text(function(d) { return d; });
+			});
+			
+		</script> 
+	</body>
+</html>

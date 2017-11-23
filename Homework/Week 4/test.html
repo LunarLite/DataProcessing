@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dataprocessing Week 4 - Mick Tozer</title>
+		<meta charset="utf-8">
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+	</head>
+	<body>
+		<script>
+			d3.xml("test.svg", "image/svg+xml", function(error, xml) {
+				if (error) throw error;    
+				document.body.appendChild(xml.documentElement);  
+				colourLegend();
+			});
+			
+			function colourLegend(){
+				var svg = d3.select("#Laag_1")
+				var selection = svg.selectAll("#kleur1")
+					.style("fill", '#ccece6')
+				var selection = svg.selectAll("#kleur2")
+					.style("fill", '#99d8c9')
+				var selection = svg.selectAll("#kleur3")
+					.style("fill", '#66c2a4')
+			}
+		</script> 
+	</body>
+</html>
