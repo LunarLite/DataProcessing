@@ -7,12 +7,21 @@
 		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
 		<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		<script type="text/javascript" src="d3line.js"></script>
 		<link rel="stylesheet" type="text/css" href="d3line.css">
 	</head>
+	<body>
+		<svg width="960" height="500"></svg>
+		<div id="buttons">
+			<button id="data1">Select Schiphol Data</button>
+			<button id="data2">Select Maastricht Data</button>
+        </div>
+	</body>
+
 	
-	<svg width="960" height="500"></svg>
-	
-	<script src="d3line.js"></script>
+	<script type="text/javascript">
+        init();
+    </script>
 		<table>
 			<tr>
 				<td><b>Source:</b></td>
