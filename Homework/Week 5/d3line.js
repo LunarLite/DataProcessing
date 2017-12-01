@@ -10,7 +10,7 @@ function init()
             useData("data_maastricht.tsv");
         })   
 
-    //useData("data_schiphol.tsv");
+    useData("data_schiphol.tsv");
 }
 
 function useData(dataName)
@@ -69,7 +69,7 @@ function useData(dataName)
 		g.append("text")
 			.attr("x", 50)
 			.attr("fill", "#000")
-			.text("Hoogste/Laagste/Gemiddelde Windsnelheid Schiphol/Maastricht");
+			.text("Hoogste/Laagste/Gemiddelde Windsnelheid from: " + dataName.slice(5, -4).toUpperCase());
 		  
 		// Axis setups
 		g.append("g")
