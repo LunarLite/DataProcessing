@@ -93,7 +93,7 @@ function useData(dataName)
 				.attr("y", 6)
 				.attr("dy", "0.71em")
 				.attr("fill", "#000")
-				.text("windsnelheidgem (0.1 M/S)");
+				.text("windsnelheid (0.1 M/S)");
 
 		// Manipulate all .wind class elements
 		var wind = g.selectAll(".wind")
