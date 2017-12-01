@@ -1,3 +1,13 @@
+/* Homework Week 5
+/  Name: Mick Tozer
+/  Collaborators: 
+/ 
+/  This draws out a linegraph showing lowest/highest/average windspeed around Schiphol and Maastricht.
+/  You can switch between either linegraphs using the buttons.
+/
+/  IN PROGRESS: You can hover the mouse over the line to see the exact data in the form of a tooltip of sorts.
+*/
+
 function init()
 {
     //setup our ui
@@ -73,12 +83,10 @@ function useData(dataName)
 		  
 		// Axis setups
 		g.append("g")
-			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + height + ")")
 			.call(d3.axisBottom(x));
 
 		g.append("g")
-			.attr("class", "axis axis--y")
 			.call(d3.axisLeft(y))
 			.append("text")
 				.attr("transform", "rotate(-90)")
@@ -91,7 +99,6 @@ function useData(dataName)
 		var wind = g.selectAll(".wind")
 			.data(winds)
 			.enter().append("g")
-				.attr("class", "wind")
 
 		// Draw path
 		wind.append("path")
