@@ -39,7 +39,7 @@ var tip = d3.tip()
 		return "<strong>" + d.LOCATION + "</strong><br>" + 
 		"<strong>Year:</strong> <span style='color:red'>" + d.TIME +"</span><br>" + 
 		"<strong>GDP:</strong> <span style='color:red'>$" + d.Value + "</span>";
-	})
+	});
 	
 // setup the svg
 var svg = d3.select("body").append("svg")
