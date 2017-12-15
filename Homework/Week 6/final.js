@@ -126,7 +126,7 @@ function DrawData(error, qol, qol_reasons) {
 			.append("textPath")
 				.attr("xlink:href",function(d,i){return "#arc_"+i;})
 				//.attr("x",function(d,i){return "#arc_"+i+"x";})
-				.text(function(d){return d.legend;});	
+				.text(function(d){return d.value;});	
 	/* Adds text, but it's not visible?
 	var text = path.append("text")
 		.attr("text-anchor", "middle")
