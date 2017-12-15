@@ -132,7 +132,7 @@ function DrawData(error, qol, qol_reasons) {
 		var g = pieSvg.append('g')
 			.attr('x', (width/6)*5)
 			.attr('y', height/2)
-			.attr('transform', 'translate(' + (pieWidth / 2) +  ',' + (pieHeight / 2) + ')');
+			.attr('transform', 'translate(' + (pieWidth / 2) +  ',' + (pieHeight / 1.9) + ')');
 			
 		var color = d3.scale.category20b()
 		
