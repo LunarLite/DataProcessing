@@ -20,7 +20,7 @@ function UseData(data) {
 		.attr('class', 'd3-tip')
 		.offset([-10, 0])
 		.html(function(d) {
-			return "<strong>Date:</strong> <span style='color:red'>" + datify(d.Date) +"</span><br>" + 
+			return "	<strong>Date:</strong> <span style='color:red'>" + datify(d.Date) +"</span><br>" + 
 			"<strong>Temperature:</strong> <span style='color:red'>" + d.Temp/10 + "°C</span>";
 		})
 		
