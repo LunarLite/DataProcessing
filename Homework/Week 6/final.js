@@ -51,6 +51,19 @@ function DrawData(error, qol, qol_reasons) {
 			.attr("x",  10)
 			.attr("y", function(d, i) {return (i*((height-50)/28)) + 53 + ((height-50)/28)/2})
 			.text(function(d){return d.Rank + ". " + d.Country});
+			
+			
+	var barTitle = barSvg.append('text')
+		.attr('x', (width/3) / 20)
+		.attr('y', height / 20)
+		.attr("font-family", "sans-serif")
+		.attr("font-size", "15px")
+		.attr("text-decoration", "underline")
+		.text("Quality of Life - EU - 2017");
+		
+	// Create the initial piechart	
+	changePie(0, qol[0].Rank, qol[0].Country);
+	
 	
 	var barSelection = barSvg.selectAll("rect")
 		.data(qol)
@@ -70,8 +83,6 @@ function DrawData(error, qol, qol_reasons) {
 			d3.select(this).style("fill", "LimeGreen");
 			changePie(d.Rank - 1, d.Rank, d.Country);
 		});
-	
-	changePie(0, qol[0].Rank, qol[0].Country);
 	
 	function changePie(index, pieRank, pieCountry)
 	{
