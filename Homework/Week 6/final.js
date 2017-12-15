@@ -1,11 +1,11 @@
-/* Homework Week 6/7
-/  Name: Mick Tozer
-/  Collaborators: 
+/* 	Homework Week 6/7
+/  	Name: Mick Tozer
+/  	Collaborators: 
 / 
-/  This draws out a linegraph showing lowest/highest/average windspeed around Schiphol and Maastricht.
-/  You can switch between either linegraphs using the buttons.
-/
-/  IN PROGRESS: You can hover the mouse over the line to see the exact data in the form of a tooltip of sorts.
+/	This .js file draws out a bar-chart and a donut-chart based on the given data.
+/	The bar-chart will show a general overview of the top 28 EU countries based on their `Quality of Life` rating.
+/	When a bar from the bar-chart is clicked, the donut-chart will show what the `Quality of Life` rating is based upon.
+/	Both charts have hover-over tooltips, the bar-chart also features a colour change upon selection.
 */
 
 // Setup the base svg
