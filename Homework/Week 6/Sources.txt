@@ -1,0 +1,10 @@
+Colour scales:
+https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md
+
+Text on arcs:
+https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
+
+Pie chart exmaples:
+http://bl.ocks.org/enjalot/1203641
+http://bl.ocks.org/hunzy/9134534
+http://zeroviscosity.com/d3-js-step-by-step/step-3-adding-a-legend
