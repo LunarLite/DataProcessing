@@ -205,10 +205,10 @@ function useData(dataName)
             
 					d3.select(this).select('text')
 					  .text(y.invert(pos.y).toFixed(2));
-				  
-					return "translate(" + mouse[0] + "," + pos.y +")";
-				})
-				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+					
+					//  + margin.left
+					return "translate(" + mouse[0] + "," + pos.y + ")";
+				});
       });
 	});
 
