@@ -148,6 +148,7 @@ function useData(dataName)
 		mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
 			.attr('width', width) // can't catch mouse events on a g element
 			.attr('height', height)
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			.attr('fill', 'none')
 			.attr('pointer-events', 'all')
 			.on('mouseout', function() 
