@@ -180,7 +180,7 @@ function useData(dataName)
 						return d;
 					})
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-					d3.selectAll(".mouse-per-line")
+				d3.selectAll(".mouse-per-line")
 				.attr("transform", function(d, i) 
 				{
 					var xDate = x.invert(mouse[0]),
@@ -207,7 +207,8 @@ function useData(dataName)
 					  .text(y.invert(pos.y).toFixed(2));
 				  
 					return "translate(" + mouse[0] + "," + pos.y +")";
-				});
+				})
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       });
 	});
 
