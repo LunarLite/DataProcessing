@@ -178,7 +178,8 @@ function useData(dataName)
 						var d = "M" + mouse[0] + "," + height;
 						d += " " + mouse[0] + "," + 0;
 						return d;
-					});
+					})
+					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 					d3.selectAll(".mouse-per-line")
 				.attr("transform", function(d, i) 
 				{
