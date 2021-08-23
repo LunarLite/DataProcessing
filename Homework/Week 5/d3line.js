@@ -206,8 +206,7 @@ function useData(dataName)
 					d3.select(this).select('text')
 					  .text(y.invert(pos.y).toFixed(2));
 					
-					//  + margin.left
-					return "translate(" + mouse[0] + "," + pos.y + ")";
+					return "translate(" + (mouse[0] + margin.left) + "," + pos.y + ")";
 				});
       });
 	});
